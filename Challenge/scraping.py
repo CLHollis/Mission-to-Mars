@@ -138,8 +138,8 @@ def mars_facts():
     except BaseException:
         return None
 
-    df.columns=['Description', 'Mars', 'Earth']
-    df.set_index('Description', inplace=True)
+    df.columns=['description', 'Mars', 'Earth']
+    df.set_index('description', inplace=True)
     #df
 
     # Convert table to HTML, add bootstrap
@@ -166,11 +166,11 @@ def mars_hemispheres(browser):
         hemispheres = {}
         
         # click on each hemisphere link
-        browser.find_by_css('a.product-item h3')[i].click()
+        browser.find_by_css('h3')[i].click()
         
         # navigate to the full-resolution image page
         # retrieve the full-resolution image URL string 
-        img_url = browser.find_link_by_text('Sample')[0]['href']
+        img_url = browser.links.find_by_text('Sample').first['href']
         
         # retrieve the title for the hemisphere image 
         title = browser.find_by_css('h2.title').text
@@ -185,7 +185,7 @@ def mars_hemispheres(browser):
         # use browser.back() to navigate back to the beginning to get the next hemisphere image
         browser.back()
 
-        return hemispheres_image_urls
+    return hemispheres_image_urls
 
 if __name__ == "__main__":
 
